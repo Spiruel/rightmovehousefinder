@@ -6,6 +6,7 @@ palettable
 localtileserver
 streamlit
 streamlit-folium
+streamlit-analytics
 streamlit-keplergl
 streamlit-bokeh-events
 git+git://github.com/giswqs/leafmap
