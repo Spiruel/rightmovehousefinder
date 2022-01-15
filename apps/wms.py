@@ -6,6 +6,7 @@ import shapely.geometry
 import numpy as np
 from bs4 import BeautifulSoup
 import json, re, requests
+import streamlit_analytics
 
 url = 'https://www.rightmove.co.uk/property-for-sale/find.html?searchType=SALE&locationIdentifier=REGION%5E1290&insId=1&radius=0.0&minPrice=&maxPrice=325000&minBedrooms=&maxBedrooms=3&displayPropertyType=&maxDaysSinceAdded=&_includeSSTC=on&sortByPriceDescending=&primaryDisplayPropertyType=&secondaryDisplayPropertyType=&oldDisplayPropertyType=&oldPrimaryDisplayPropertyType=&newHome=&auction=false'
 res = requests.get(url)
@@ -76,6 +77,7 @@ def get_layers(url):
 
 
 def app():
+    streamlit_analytics.start_tracking()
     st.title("Rightmove house finder for Mum and Dad")
     st.markdown(
         """
@@ -204,6 +206,8 @@ def app():
            m.zoom_to_bounds(centre.bounds)
 
         m.to_streamlit(width, height)
+        
+    streamlit_analytics.stop_tracking()
         
             
 if __name__ == '__main__':

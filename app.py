@@ -3,6 +3,8 @@ from multiapp import MultiApp
 from apps import (
     wms
 )
+import streamlit as st
+import streamlit_analytics
 
 st.set_page_config(layout="wide")
 
