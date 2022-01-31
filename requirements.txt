@@ -4,6 +4,7 @@ keplergl
 palettable
 # pygdal==3.2.2.10
 localtileserver
+convertbng
 streamlit==1.3.1
 streamlit-folium
 streamlit-analytics
