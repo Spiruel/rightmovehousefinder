@@ -7,6 +7,8 @@ import numpy as np
 from bs4 import BeautifulSoup
 import json, re, requests
 import streamlit_analytics
+import streamlit.components.v1 as components
+from convertbng.util import convert_bng, convert_lonlat
 
 url = 'https://www.rightmove.co.uk/property-for-sale/find.html?searchType=SALE&locationIdentifier=REGION%5E1290&insId=1&radius=0.0&minPrice=&maxPrice=325000&minBedrooms=&maxBedrooms=3&displayPropertyType=&maxDaysSinceAdded=&_includeSSTC=on&sortByPriceDescending=&primaryDisplayPropertyType=&secondaryDisplayPropertyType=&oldDisplayPropertyType=&oldPrimaryDisplayPropertyType=&newHome=&auction=false'
 res = requests.get(url)
@@ -134,7 +136,7 @@ def app():
                 with st.container():
                     st.info(rightm_url)
                     st.caption(f'Acquired coordinates ({lat}, {lon})')
-                                   
+                                                      
                 container2 = st.container()
                 container2.write('')
                 
@@ -155,6 +157,10 @@ def app():
                             
                 if b'garage' in r.content.lower():
                     st.write('A garage is mentioned in this property listing.')
+                    
+                easting, northing = convert_bng(lon, lat)
+                floodrisk_url = f"https://check-long-term-flood-risk.service.gov.uk/map?easting={easting[0]}&northing={northing[0]}&map=SurfaceWater"
+                st.markdown(f"[View gov flood risk map here]({floodrisk_url})")
                 
                 if postcode is not None:
                         iod_score = get_iod_doogal(postcode)
