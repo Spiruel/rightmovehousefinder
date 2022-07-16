@@ -12,7 +12,8 @@ from convertbng.util import convert_bng, convert_lonlat
 
 from io import StringIO
 
-url = 'https://www.rightmove.co.uk/property-for-sale/find.html?searchType=SALE&locationIdentifier=REGION%5E1290&insId=1&radius=0.0&minPrice=&maxPrice=325000&minBedrooms=&maxBedrooms=3&displayPropertyType=&maxDaysSinceAdded=&_includeSSTC=on&sortByPriceDescending=&primaryDisplayPropertyType=&secondaryDisplayPropertyType=&oldDisplayPropertyType=&oldPrimaryDisplayPropertyType=&newHome=&auction=false'
+url = 'https://www.rightmove.co.uk/property-to-rent/find.html?minBedrooms=1&maxBedrooms=2&keywords=&sortType=6&viewType=LIST&channel=RENT&index=0&maxPrice=1000&radius=1.0&locationIdentifier=REGION%5E96885'
+#'https://www.rightmove.co.uk/property-for-sale/find.html?searchType=SALE&locationIdentifier=REGION%5E1290&insId=1&radius=0.0&minPrice=&maxPrice=325000&minBedrooms=&maxBedrooms=3&displayPropertyType=&maxDaysSinceAdded=&_includeSSTC=on&sortByPriceDescending=&primaryDisplayPropertyType=&secondaryDisplayPropertyType=&oldDisplayPropertyType=&oldPrimaryDisplayPropertyType=&newHome=&auction=false'
 res = requests.get(url)
 soup = BeautifulSoup(res.content, 'html.parser')
 random_props = np.unique(['https://www.rightmove.co.uk'+i['href'] for i in soup.find_all(class_='propertyCard-link')])
@@ -131,7 +132,7 @@ def app():
     
         #empty = st.empty()
         st.write('or')
-        aa = st.button('Choose a random property in the Stroud area')
+        aa = st.button('Choose a random property to rent in the Leeds area')
         if aa:
             initial = np.random.choice(random_props)
         
