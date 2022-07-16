@@ -12,3 +12,4 @@ streamlit-keplergl
 streamlit-bokeh-events
 leafmap
 geemap
+html5lib
