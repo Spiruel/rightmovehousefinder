@@ -79,7 +79,7 @@ def get_layers(url):
     options = leafmap.get_wms_layers(url)
     return options
 
-@st.cache
+#@st.cache
 def get_epc_df(postcode):
         headers = {
             'Accept': 'text/csv',
