@@ -10,6 +10,8 @@ import streamlit_analytics
 import streamlit.components.v1 as components
 from convertbng.util import convert_bng, convert_lonlat
 
+from io import StringIO
+
 url = 'https://www.rightmove.co.uk/property-for-sale/find.html?searchType=SALE&locationIdentifier=REGION%5E1290&insId=1&radius=0.0&minPrice=&maxPrice=325000&minBedrooms=&maxBedrooms=3&displayPropertyType=&maxDaysSinceAdded=&_includeSSTC=on&sortByPriceDescending=&primaryDisplayPropertyType=&secondaryDisplayPropertyType=&oldDisplayPropertyType=&oldPrimaryDisplayPropertyType=&newHome=&auction=false'
 res = requests.get(url)
 soup = BeautifulSoup(res.content, 'html.parser')
@@ -77,6 +79,31 @@ def get_layers(url):
     options = leafmap.get_wms_layers(url)
     return options
 
+@st.cache
+def get_epc_df(postcode):
+        headers = {
+            'Accept': 'text/csv',
+            'Authorization': f'Basic {st.secrets["EPC_API_KEY"]}',
+        }
+
+        df = pd.DataFrame()
+        df['Address'] = ''
+
+        params = {
+            'postcode': postcode,
+            'size': 10000
+        }
+
+        response = requests.get('https://epc.opendatacommunities.org/api/v1/domestic/search', params=params, headers=headers)
+        #st.write(response.content)
+
+        result = str(response.content, 'utf-8')
+        data = StringIO(result)
+        df = pd.read_csv(data)
+        df = df.sort_values(by='address1')
+        df['lodgement-date'] = pd.to_datetime(df['lodgement-date'])
+        
+        return df
 
 def app():
     streamlit_analytics.start_tracking()
@@ -143,6 +170,10 @@ def app():
                 postcode = lon_lat_to_postcode(lon, lat)
                 if postcode is not None:
                     st.write(f'Full postcode from coordinates: {postcode}')
+                
+                    epc_df = get_epc_df(postcode)
+                    address = st.selectbox('Choose address', epc_df['address1'])
+                    st.metric(label='Total floor area', value=str(epc_df.loc[epc_df['address1']==address].sort_values('lodgement-date')['total-floor-area'].iloc[-1]) + " square metres")
             
                 address = get_address(rightm_soup)
                 if address is not None:
