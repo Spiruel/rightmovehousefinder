@@ -141,7 +141,7 @@ def app():
         "Enter Rightmove URL:", value=initial
         )
        
-        r = requests.get(rightm_url)
+        r = requests.get(rightm_url, headers=headers)
         if 'we’re sorry, we couldn’t find the property'.lower() in r.text.lower():
             st.error('Invalid Rightmove URL')
         else:
