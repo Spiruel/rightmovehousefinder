@@ -12,7 +12,8 @@ from convertbng.util import convert_bng, convert_lonlat
 
 from io import StringIO
 
-url = 'https://www.rightmove.co.uk/property-for-sale/find.html?searchType=SALE&locationIdentifier=REGION%5E1290&insId=1&radius=0.0&minPrice=&maxPrice=325000&minBedrooms=&maxBedrooms=3&displayPropertyType=&maxDaysSinceAdded=&_includeSSTC=on&sortByPriceDescending=&primaryDisplayPropertyType=&secondaryDisplayPropertyType=&oldDisplayPropertyType=&oldPrimaryDisplayPropertyType=&newHome=&auction=false'
+url = 'https://www.rightmove.co.uk/property-for-sale/find.html?includeSSTC=false&keywords=&sortType=2&viewType=LIST&channel=BUY&index=0&maxPrice=350000&radius=1.0&locationIdentifier=REGION%5E8171'
+#'https://www.rightmove.co.uk/property-for-sale/find.html?searchType=SALE&locationIdentifier=REGION%5E1290&insId=1&radius=0.0&minPrice=&maxPrice=325000&minBedrooms=&maxBedrooms=3&displayPropertyType=&maxDaysSinceAdded=&_includeSSTC=on&sortByPriceDescending=&primaryDisplayPropertyType=&secondaryDisplayPropertyType=&oldDisplayPropertyType=&oldPrimaryDisplayPropertyType=&newHome=&auction=false'
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
 res = requests.get(url, headers=headers)
 soup = BeautifulSoup(res.content, 'html.parser')
@@ -108,7 +109,7 @@ def get_epc_df(postcode):
 
 def app():
     streamlit_analytics.start_tracking()
-    st.title("Rightmove house finder for Mum and Dad")
+    st.title("Rightmove house finder helper")
     st.markdown(
         """
     This app displays the location of a property listed on Rightmove, alongside information about noise pollution and flooding extent (modify layers in top-right of map). It also looks up information relevant to the property and the local area (second column).
