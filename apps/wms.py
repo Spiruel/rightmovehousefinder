@@ -135,7 +135,7 @@ def app():
         st.write('or')
         aa = st.button('Choose a random property to rent in the Leeds area')
         if aa:
-            initial = np.random.choice(random_props)
+            initial = np.random.choice(list(random_props))
         
         rightm_url = container.text_input(
         "Enter Rightmove URL:", value=initial
