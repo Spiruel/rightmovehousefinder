@@ -13,3 +13,5 @@ streamlit-bokeh-events
 leafmap
 geemap
 html5lib
+altair<5
+requests==2.31.0
