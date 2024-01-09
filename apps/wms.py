@@ -12,8 +12,7 @@ from convertbng.util import convert_bng, convert_lonlat
 
 from io import StringIO
 
-url = 'https://www.rightmove.co.uk/properties/86621295#/?channel=RES_BUY'
-#'https://www.rightmove.co.uk/property-for-sale/find.html?searchType=SALE&locationIdentifier=REGION%5E1290&insId=1&radius=0.0&minPrice=&maxPrice=325000&minBedrooms=&maxBedrooms=3&displayPropertyType=&maxDaysSinceAdded=&_includeSSTC=on&sortByPriceDescending=&primaryDisplayPropertyType=&secondaryDisplayPropertyType=&oldDisplayPropertyType=&oldPrimaryDisplayPropertyType=&newHome=&auction=false'
+url = 'https://www.rightmove.co.uk/property-for-sale/find.html?searchType=SALE&locationIdentifier=REGION%5E1290&insId=1&radius=0.0&minPrice=&maxPrice=325000&minBedrooms=&maxBedrooms=3&displayPropertyType=&maxDaysSinceAdded=&_includeSSTC=on&sortByPriceDescending=&primaryDisplayPropertyType=&secondaryDisplayPropertyType=&oldDisplayPropertyType=&oldPrimaryDisplayPropertyType=&newHome=&auction=false'
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
 res = requests.get(url, headers=headers)
 soup = BeautifulSoup(res.content, 'html.parser')
