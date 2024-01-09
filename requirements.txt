@@ -11,7 +11,7 @@ streamlit-analytics
 streamlit-keplergl
 streamlit-bokeh-events
 leafmap
-geemap
+geemap==0.26.0
 html5lib
 altair<5
 requests==2.31.0
