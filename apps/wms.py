@@ -12,7 +12,7 @@ from convertbng.util import convert_bng, convert_lonlat
 
 from io import StringIO
 
-url = 'https://www.rightmove.co.uk/property-for-sale/find.html?includeSSTC=false&keywords=&sortType=2&viewType=LIST&channel=BUY&index=0&maxPrice=350000&radius=1.0&locationIdentifier=REGION%5E8171'
+url = 'https://www.rightmove.co.uk/property-for-sale/find.html?minBedrooms=2&propertyTypes=detached%2Csemi-detached%2Cterraced&maxBedrooms=3&includeSSTC=false&keywords=&sortType=2&viewType=LIST&channel=BUY&index=0&maxPrice=350000&radius=1.0&locationIdentifier=REGION%5E8171'
 #'https://www.rightmove.co.uk/property-for-sale/find.html?searchType=SALE&locationIdentifier=REGION%5E1290&insId=1&radius=0.0&minPrice=&maxPrice=325000&minBedrooms=&maxBedrooms=3&displayPropertyType=&maxDaysSinceAdded=&_includeSSTC=on&sortByPriceDescending=&primaryDisplayPropertyType=&secondaryDisplayPropertyType=&oldDisplayPropertyType=&oldPrimaryDisplayPropertyType=&newHome=&auction=false'
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
 res = requests.get(url, headers=headers)
@@ -133,7 +133,7 @@ def app():
     
         #empty = st.empty()
         st.write('or')
-        aa = st.button('Choose a random property to rent in the Leeds area')
+        aa = st.button('Choose a random property to rent in the Manchester area')
         if aa:
             initial = np.random.choice(list(random_props))
         
